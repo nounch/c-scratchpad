@@ -17,7 +17,11 @@ void say() {
 
   /* printf("%s: %d\n", "Co" "lor", GREEN); */
 
-  printf("say");
+  printf("SAY\n");
+}
+
+void saySomething(char message[]) {
+  printf("%s\n", message);
 }
 
 void squeeze(char s[], int c) {
@@ -76,6 +80,42 @@ void listArgv(int argc, char *argv[]) {
   }
 }
 
+void report(int values[]) {
+  for(int i = 0; i < sizeof(values) - 1; i++) {
+    printf("%d\n", values[i]);
+  }
+}
+
+void reportPoint(int x, int y) {
+  printf("point.x: %d; point.y: %d\n", x, y);
+}
+
+void testStructures()  {
+  /* Simple structure example */
+  struct point {
+    int x;
+    int y;
+  } minpt;
+  minpt.x = 22;
+  minpt.y = 33;
+  printf("minpt.x: %d; minpt.y: %d\n", minpt.x, minpt.y);
+
+  struct point pt = { 44, 55 };
+  printf("pt.x: %d; pt.y: %d\n", pt.x, pt.y);
+
+
+  /* Structures can hold pointers to functions */
+  struct something {
+    /* void foo() { */
+    /*   printf("%s", "FOO"); */
+    /* }; */
+    void (*foo)();
+    int bar;
+  };
+  struct something sth = { &saySomething, 30 };
+  sth.foo("BARFOO");
+}
+
 void main(int argc, char *argv[]) {
   // printf("Test\n");
   /* say(); */
@@ -94,6 +134,11 @@ void main(int argc, char *argv[]) {
   /* XXX */
   /* char s[] = {'a', 'b', 'c', 'd', 'e', 'f'}; */
   /* doList(&s); */
+
+
+  /* /\* Iterate arrays *\/ */
+  /* int someNumbers[] = { 23, 24, 25 }; */
+  /* report(someNumbers); */
 
 
   /* /\* Operations on arrays *\/ */
@@ -124,6 +169,11 @@ void main(int argc, char *argv[]) {
   /* int *f();    /\* f: function returning pointer to int *\/ */
   /* int (*pf)(); /\* pf: pointer to function returning int *\/ */
 
+
   /* Dispatching command line arguments */
-  listArgv(argc, argv);
+  /* listArgv(argc, argv); */
+
+
+  /* Structures */
+  testStructures();
 }
